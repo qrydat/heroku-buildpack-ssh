@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require 'yaml'
+
+CONFIG_FILE = File.expand_path './config/ssh.yml'
+HOME_DIR = File.expand_path '~'
+SSH_DIR = File.join HOME_DIR, '.ssh'
+
+config = YAML.load_file CONFIG_FILE
+known_hosts = config['known_hosts'] || []
+
+puts '-----> Creating ~/.ssh'
+Dir.mkdir SSH_DIR unless File.directory? SSH_DIR
+
+write_known_hosts if known_hosts.any?
+
+def write_known_hosts
+  known_hosts_file = File.join SSH_DIR, 'known_hosts'
+  puts '-----> Writing known_hosts file'
+
+  File.open(known_hosts_file, 'w') do |file|
+    file.write known_hosts.join('\n')
+    file.close
+  end
+end

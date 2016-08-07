@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+CONFIG_FILE = 'ssh.yml'.freeze
+ROOT_DIR = File.expand_path './'
+CONFIG_DIR = File.join ROOT_DIR, 'config'
+
+if File.exists File.join CONFIG_DIR, CONFIG_FILE
+  puts '-----> ssh config file detected'
+  exit 0
+else
+  puts '-----> Cannot detect ssh config file'
+  exit 1
+end
