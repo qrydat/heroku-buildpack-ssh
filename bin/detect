@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
+# Use `bin/detect BUILD_DIR`
 
 CONFIG_FILE = 'ssh.yml'.freeze
-ROOT_DIR = File.expand_path './'
+ROOT_DIR = ARGV.first
 CONFIG_DIR = File.join ROOT_DIR, 'config'
 
 if File.exists File.join CONFIG_DIR, CONFIG_FILE
